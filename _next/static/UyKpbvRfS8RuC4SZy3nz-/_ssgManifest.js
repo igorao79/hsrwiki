@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fcharacter\u002F[id]","\u002Flight-cone\u002F[id]","\u002Frarity\u002F[rarity]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
