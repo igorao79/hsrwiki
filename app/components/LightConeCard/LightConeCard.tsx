@@ -14,10 +14,10 @@ interface LightConeCardProps {
 
 export const LightConeCard: React.FC<LightConeCardProps> = ({ lightCone, size = 'medium' }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { png: lightConeImg } = getImageSources(lightCone.imageUrl);
-  const { png: pathImg } = getImageSources(`images/paths/${lightCone.path.toLowerCase()}`);
+  const { avif, webp, png } = getImageSources(lightCone.imageUrl);
+  const pathImages = getImageSources(`images/paths/${lightCone.path.toLowerCase()}`);
   
-  // Класс в зависимости от редкости
+  // Добавим класс в зависимости от редкости
   const rarityClass = `rarity${lightCone.rarity}`;
 
   return (
@@ -27,19 +27,32 @@ export const LightConeCard: React.FC<LightConeCardProps> = ({ lightCone, size = 
         onClick={() => setIsModalOpen(true)}
       >
         <div className={styles.pathIcon}>
-          <img 
-            src={pathImg} 
-            alt={lightCone.path}
-            className={styles.pathImage}
-          />
+          <picture>
+            <source srcSet={pathImages.avif} type="image/avif" />
+            <source srcSet={pathImages.webp} type="image/webp" />
+            <img 
+              src={pathImages.png} 
+              alt={lightCone.path}
+              className={styles.pathImage}
+              width={20}
+              height={20}
+            />
+          </picture>
         </div>
 
         <div className={styles.imageContainer}>
-          <img 
-            src={lightConeImg} 
-            alt={lightCone.name} 
-            className={styles.image}
-          />
+          <picture>
+            <source srcSet={avif} type="image/avif" />
+            <source srcSet={webp} type="image/webp" />
+            <img 
+              src={png} 
+              alt={lightCone.name} 
+              className={styles.image}
+              loading="lazy"
+              width={100}
+              height={144}
+            />
+          </picture>
         </div>
 
         <div className={styles.info}>
