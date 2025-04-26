@@ -1,0 +1,26 @@
+1:"$Sreact.fragment"
+2:I[7555,[],""]
+3:I[1295,[],""]
+4:I[6874,["874","static/chunks/874-ca8fed647470ab64.js","345","static/chunks/app/not-found-b5f292689dcf96ac.js"],""]
+5:I[894,[],"ClientPageRoot"]
+6:I[4353,["711","static/chunks/8e1d74a4-9adaa4d58f78a17a.js","874","static/chunks/874-ca8fed647470ab64.js","751","static/chunks/751-879cfe2eb84fb8a2.js","191","static/chunks/191-0f8c077d0c0e9525.js","292","static/chunks/app/rarity/5/page-2cb36974890d95b4.js"],"default"]
+9:I[9665,[],"MetadataBoundary"]
+b:I[9665,[],"OutletBoundary"]
+e:I[4911,[],"AsyncMetadataOutlet"]
+10:I[9665,[],"ViewportBoundary"]
+12:I[6614,[],""]
+:HL["/hsrwiki/_next/static/css/7d1c910b75142002.css","style"]
+:HL["/hsrwiki/_next/static/css/622fdc2774b3fef2.css","style"]
+:HL["/hsrwiki/_next/static/css/fdee6014e9fc65e1.css","style"]
+:HL["/hsrwiki/_next/static/css/413bbfcba3b43d82.css","style"]
+0:{"P":null,"b":"RuNanPEyc0kGyhFJBV8Fk","p":"/hsrwiki","c":["","rarity","5",""],"i":false,"f":[[["",{"children":["rarity",{"children":["5",{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/hsrwiki/_next/static/css/7d1c910b75142002.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","1",{"rel":"stylesheet","href":"/hsrwiki/_next/static/css/622fdc2774b3fef2.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"ru","children":["$","body",null,{"className":"__variable_ab1039 __variable_9dccd3","children":["$","main",null,{"children":["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","div",null,{"className":"container","style":{"textAlign":"center","padding":"50px 20px"},"children":[["$","h1",null,{"children":"404 - Страница не найдена"}],["$","p",null,{"children":"Извините, страница которую вы искали не найдена"}],["$","$L4",null,{"href":"/","style":{"display":"inline-block","marginTop":"20px","padding":"10px 20px","background":"#7A5AF8","color":"white","borderRadius":"4px","textDecoration":"none"},"children":"Вернуться на главную"}]]}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}]}]}]]}],{"children":["rarity",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["5",["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L3",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":[["$","$L5",null,{"Component":"$6","searchParams":{},"params":{},"promises":["$@7","$@8"]}],["$","$L9",null,{"children":"$La"}],[["$","link","0",{"rel":"stylesheet","href":"/hsrwiki/_next/static/css/fdee6014e9fc65e1.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","link","1",{"rel":"stylesheet","href":"/hsrwiki/_next/static/css/413bbfcba3b43d82.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","$Lb",null,{"children":["$Lc","$Ld",["$","$Le",null,{"promise":"$@f"}]]}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","gqgusAi8lwzvcKIbrX6B8",{"children":[["$","$L10",null,{"children":"$L11"}],null]}],null]}],false]],"m":"$undefined","G":["$12","$undefined"],"s":false,"S":true}
+13:"$Sreact.suspense"
+14:I[4911,[],"AsyncMetadata"]
+7:{}
+8:{}
+a:["$","$13",null,{"fallback":null,"children":["$","$L14",null,{"promise":"$@15"}]}]
+d:null
+11:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+c:null
+15:{"metadata":[["$","title","0",{"children":"HSR Вики"}],["$","meta","1",{"name":"description","content":"Вики для Honkai: Star Rail"}],["$","link","2",{"rel":"icon","href":"/hsrwiki/favicon.ico","type":"image/x-icon","sizes":"16x16"}]],"error":null,"digest":"$undefined"}
+f:{"metadata":"$15:metadata","error":null,"digest":"$undefined"}
