@@ -1,0 +1,55 @@
+.rarity-stars {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  
+  &__star {
+    /* Переменные цветов звезд беру из globals.scss */
+    
+    &--gold {
+      color: var(--star-gold); /* #FFD700 */
+    }
+    
+    &--purple {
+      color: var(--star-purple); /* #A020F0 */
+    }
+    
+    /* Размеры звезд */
+    &--small {
+      width: 12px;
+      height: 12px;
+    }
+    
+    &--medium {
+      width: 16px;
+      height: 16px;
+    }
+    
+    &--large {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+  .rarity-stars {
+    &__star {
+      &--small {
+        width: 10px;
+        height: 10px;
+      }
+      
+      &--medium {
+        width: 14px;
+        height: 14px;
+      }
+      
+      &--large {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+} 

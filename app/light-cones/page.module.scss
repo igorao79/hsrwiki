@@ -1,0 +1,36 @@
+.page {
+  background-color: #1a1d23;
+  min-height: 100vh;
+}
+
+.content {
+  padding: 30px 0;
+}
+
+.pageTitle {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ecf0f1;
+  text-align: center;
+}
+
+.description {
+  background-color: #34495e;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  
+  p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #ecf0f1;
+    text-align: center;
+  }
+}
+
+.lists {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+} 

@@ -1,34 +1,30 @@
 'use client';
 
+import { Header } from '../../components/Header/Header';
+import { CharacterCard } from '../../components/CharacterCard/CharacterCard';
+import { fourStarCharacters } from '../../data/fourStarCharacters';
 import { useState, useMemo } from 'react';
-import { CharacterCard } from './components/CharacterCard/CharacterCard';
-import { Header } from './components/Header/Header';
 import { FaSearch } from 'react-icons/fa';
-import { characters } from './data/fiveStarCharacters';
-import { fourStarCharacters } from './data/fourStarCharacters';
 
-export default function Home() {
+export default function FourStarPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  
-  // Объединяем все персонажи в один массив для главной страницы
-  const allCharacters = useMemo(() => [...characters, ...fourStarCharacters], []);
   
   const filteredCharacters = useMemo(() => {
     if (!searchQuery.trim()) {
-      return allCharacters;
+      return fourStarCharacters;
     }
     
     const query = searchQuery.toLowerCase().trim();
-    return allCharacters.filter(char => 
+    return fourStarCharacters.filter(char => 
       char.name.toLowerCase().includes(query) || 
       char.element.toLowerCase().includes(query) || 
       char.path.toLowerCase().includes(query)
     );
-  }, [searchQuery, allCharacters]);
+  }, [searchQuery]);
   
   // Группируем персонажей по патчам и сортируем патчи в порядке убывания
   const groupedCharacters = useMemo(() => {
-    const groups: Record<string, typeof allCharacters> = {};
+    const groups: Record<string, typeof fourStarCharacters> = {};
     
     filteredCharacters.forEach(char => {
       if (!groups[char.patch]) {
@@ -54,11 +50,10 @@ export default function Home() {
     <>
       <Header />
       <div className="container">
-        <section className="home-page">
-          <h1 className="home-page__title">HSR Вики</h1>
-          <p className="home-page__description">
-            Просмотр всех персонажей Honkai: Star Rail и подробной информации
-            о их экипировке, артефактах и командных составах.
+        <div className="page">
+          <h1 className="page__title">4-звездочные персонажи</h1>
+          <p className="page__description">
+            Список всех доступных 4-звездочных персонажей в Honkai: Star Rail
           </p>
           
           <div className="search-block">
@@ -66,7 +61,7 @@ export default function Home() {
               <input
                 type="text"
                 className="search-input"
-                placeholder="Поиск персонажей..."
+                placeholder="Поиск 4★ персонажей..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -100,8 +95,8 @@ export default function Home() {
               <p>Персонажи не найдены. Попробуйте изменить запрос поиска.</p>
             </div>
           )}
-        </section>
+        </div>
       </div>
     </>
   );
-}
+} 

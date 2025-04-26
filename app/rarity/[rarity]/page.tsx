@@ -1,34 +1,36 @@
 'use client';
 
+import { useParams } from 'next/navigation';
 import { useState, useMemo } from 'react';
-import { CharacterCard } from './components/CharacterCard/CharacterCard';
-import { Header } from './components/Header/Header';
-import { FaSearch } from 'react-icons/fa';
-import { characters } from './data/fiveStarCharacters';
-import { fourStarCharacters } from './data/fourStarCharacters';
+import { CharacterCard } from '../../components/CharacterCard/CharacterCard';
+import { Header } from '../../components/Header/Header';
+import { FaSearch, FaStar } from 'react-icons/fa';
+import { characters } from '../../data/fiveStarCharacters';
 
-export default function Home() {
+export default function RarityPage() {
+  const params = useParams();
+  const rarity = parseInt(params.rarity as string, 10);
+  
   const [searchQuery, setSearchQuery] = useState('');
   
-  // Объединяем все персонажи в один массив для главной страницы
-  const allCharacters = useMemo(() => [...characters, ...fourStarCharacters], []);
-  
   const filteredCharacters = useMemo(() => {
+    const filteredByRarity = characters.filter(char => char.rarity === rarity);
+    
     if (!searchQuery.trim()) {
-      return allCharacters;
+      return filteredByRarity;
     }
     
     const query = searchQuery.toLowerCase().trim();
-    return allCharacters.filter(char => 
+    return filteredByRarity.filter(char => 
       char.name.toLowerCase().includes(query) || 
       char.element.toLowerCase().includes(query) || 
       char.path.toLowerCase().includes(query)
     );
-  }, [searchQuery, allCharacters]);
+  }, [rarity, searchQuery]);
   
   // Группируем персонажей по патчам и сортируем патчи в порядке убывания
   const groupedCharacters = useMemo(() => {
-    const groups: Record<string, typeof allCharacters> = {};
+    const groups: Record<string, typeof characters> = {};
     
     filteredCharacters.forEach(char => {
       if (!groups[char.patch]) {
@@ -50,15 +52,24 @@ export default function Home() {
       });
   }, [filteredCharacters]);
   
+  const starIcon = rarity === 5 
+    ? <FaStar className="rarity-star rarity-star--gold" /> 
+    : <FaStar className="rarity-star rarity-star--purple" />;
+  
   return (
     <>
       <Header />
       <div className="container">
         <section className="home-page">
-          <h1 className="home-page__title">HSR Вики</h1>
+          <h1 className="home-page__title">
+            <span className="rarity-title">
+              {rarity} <span className="rarity-title__star">{starIcon}</span> Персонажи
+            </span>
+          </h1>
           <p className="home-page__description">
-            Просмотр всех персонажей Honkai: Star Rail и подробной информации
-            о их экипировке, артефактах и командных составах.
+            {rarity === 5 
+              ? 'Просмотр всех 5-звёздочных персонажей Honkai: Star Rail' 
+              : 'Просмотр всех 4-звёздочных персонажей Honkai: Star Rail'}
           </p>
           
           <div className="search-block">
@@ -104,4 +115,4 @@ export default function Home() {
       </div>
     </>
   );
-}
+} 

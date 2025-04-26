@@ -1,36 +1,152 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HSR Вики
 
-## Getting Started
+Всеобъемлющая вики для Honkai: Star Rail, созданная с использованием Next.js, React и SCSS по методологии BEM.
 
-First, run the development server:
+## Особенности
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Просмотр карточек персонажей, сгруппированных по версиям патчей (от новых к старым)
+- Фильтрация персонажей по редкости (5★ и 4★)
+- Поиск персонажей по имени, элементу или пути
+- Просмотр подробной информации о персонажах, включая:
+  - Характеристики и атрибуты персонажа
+  - Рекомендации по лучшим Световым конусам
+  - Рекомендации по лучшим Реликвиям
+  - Рекомендуемые составы команд
+- Полностью адаптивный дизайн для всех размеров устройств
+- Современный интерфейс с последовательным стилем
+
+## Технический стек
+
+- **Фреймворк**: Next.js (App Router)
+- **Язык**: TypeScript
+- **Стили**: SCSS с методологией BEM
+- **Оптимизация изображений**: Next.js Image с несколькими форматами (avif, webp, png)
+- **Иконки**: React Icons
+
+## Структура проекта
+
+```
+/app
+  /components         # Повторно используемые UI компоненты
+    /CharacterCard    # Компонент карточки персонажа для списка
+    /CharacterDetails # Компонент для подробного просмотра персонажа
+    /Header           # Компонент шапки сайта
+  /data               # Данные персонажей
+  /styles             # Глобальные стили
+  /character          # Динамические маршруты для страниц персонажей
+    /[id]             # Динамический маршрут ID персонажа
+  /rarity             # Страницы для отображения персонажей по редкости
+    /[rarity]         # Динамический маршрут редкости (4 или 5)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Начало работы
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Клонируйте репозиторий
+2. Установите зависимости:
+   ```bash
+   npm install
+   ```
+3. Настройте Cloudinary:
+   - Зарегистрируйтесь на [Cloudinary](https://cloudinary.com/)
+   - Создайте файл `.env.local` в корне проекта и добавьте:
+     ```
+     NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=ваш-cloud-name
+     ```
+   - Загрузите изображения в Cloudinary, сохраняя структуру папок:
+     - `/characters/` - для изображений персонажей
+     - `/light-cones/` - для световых конусов
+     - `/relics/` - для реликвий
+   - Структура файлов должна совпадать с путями в `characters.ts`
+   - Cloudinary автоматически предоставит доступ к изображениям в форматах avif, webp и png
+4. Запустите dev-сервер:
+```bash
+npm run dev
+```
+5. Откройте [http://localhost:3000](http://localhost:3000) в браузере
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Управление изображениями
 
-## Learn More
+Проект использует Cloudinary для управления изображениями:
 
-To learn more about Next.js, take a look at the following resources:
+- **Преимущества**: 
+  - Автоматическая оптимизация и конвертация изображений
+  - Освобождает место в репозитории
+  - Ускоряет загрузку страниц с помощью CDN
+  - Позволяет динамически изменять размеры
+  
+- **Структура URL изображений**:
+  - В файле `characters.ts` указывайте пути без учета формата
+  - Пример: `/images/characters/seele` вместо `/images/characters/seele.png`
+  - Утилиты в `utils/cloudinary.ts` автоматически сгенерируют правильные URL для разных форматов
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Добавление новых персонажей
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Чтобы добавить новых персонажей в вики, отредактируйте файл `app/data/characters.ts` и добавьте новый объект персонажа следуя существующей структуре. Обязательно указывайте версию патча (`patch`) для правильной группировки персонажей.
 
-## Deploy on Vercel
+## Функции
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Поиск**: Можно искать персонажей по имени, элементу или пути
+- **Группировка по патчам**: Персонажи автоматически группируются по версиям патчей в порядке от нового к старому
+- **Фильтрация по редкости**: Отдельные страницы для 5★ и 4★ персонажей с соответствующими цветами звезд
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Лицензия
+
+Этот проект с открытым исходным кодом и доступен под лицензией MIT.
+
+## Особенности отображения
+
+- **Приоритет форматов изображений**: avif > webp > png
+- **Рамки для рекомендаций**:
+  - Световые конусы: первый (лучший) имеет золотую рамку, второй - серебряную, третий - бронзовую
+  - Реликвии: первая (лучшая) имеет золотую рамку, вторая - серебряную
+
+## Обновление изображений
+
+Если вы добавили новые изображения в Cloudinary, но они не появляются на сайте из-за кеширования, выполните следующие шаги:
+
+1. Запустите скрипт для обновления версии изображений:
+   ```bash
+   node app/utils/refresh-images.js
+   ```
+   
+2. Перезапустите сервер разработки:
+   ```bash
+   npm run dev
+   ```
+
+Этот скрипт обновит переменную `NEXT_PUBLIC_BUILD_VERSION` в файле `.env.local`, что заставит браузеры и CDN обновить кеш изображений.
+
+## Структура изображений в Cloudinary
+
+При загрузке изображений в Cloudinary соблюдайте следующую структуру:
+
+1. **Основные изображения персонажей**:
+   - Обычные: `characters/seele`, `characters/blade`, и т.д.
+   - Splash версии: `characters/seele_splash`, `characters/blade_splash`, и т.д.
+
+2. **Изображения световых конусов**:
+   - `light-cones/in-the-night`, `light-cones/cruising-in-the-stellar-sea`, и т.д.
+
+3. **Изображения реликвий**:
+   - `relics/hunter-of-glacial-forest`, `relics/genius-of-brilliant-stars`, и т.д.
+
+Важно:
+- Не включайте префикс `/images/` при загрузке в Cloudinary
+- Можно загружать файлы в WebP формате - Cloudinary автоматически оптимизирует их
+- При загрузке в Cloudinary используйте Public ID точно соответствующий путям выше
+- Приложение использует автоматическую оптимизацию изображений (f_auto,q_auto)
+
+### Тестовые URL для проверки
+```
+// URL для обычного изображения персонажа
+https://res.cloudinary.com/dd775hmwe/image/upload/f_auto,q_auto/characters/seele
+
+// URL для splash-версии персонажа
+https://res.cloudinary.com/dd775hmwe/image/upload/f_auto,q_auto/characters/seele_splash
+
+// URL для светового конуса
+https://res.cloudinary.com/dd775hmwe/image/upload/f_auto,q_auto/light-cones/in-the-night
+
+// URL для реликвии
+https://res.cloudinary.com/dd775hmwe/image/upload/f_auto,q_auto/relics/hunter-of-glacial-forest
+```
