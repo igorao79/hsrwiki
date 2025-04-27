@@ -24,12 +24,24 @@
     flex-wrap: wrap;
   }
 
-  &__element {
-    padding: 0.25rem 0.75rem;
+  &__element-container {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
     border-radius: 0.25rem;
+    padding: 0.25rem 0.75rem;
+  }
+
+  &__element-image {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    margin-right: 5px;
+  }
+
+  &__element {
     font-weight: 600;
     font-size: 0.9rem;
-    background-color: rgba(0, 0, 0, 0.3);
     
     &--physical { color: #d8d8d8; }
     &--fire { color: #ff6b4a; }
@@ -128,12 +140,20 @@
   &__item {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem;
+    gap: 1rem;
+    padding: 1rem;
     background-color: var(--background-secondary);
     border-radius: 0.5rem;
-    transition: transform 0.2s ease;
     border: 2px solid transparent;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+    color: inherit;
+    text-decoration: none;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
     
     &--gold {
       border-color: #ffd700;
@@ -253,30 +273,37 @@
 
   &__team-member-image-container {
     position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
   }
 
   &__team-member-image {
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 
-  &__team-member-element {
+  &__team-member-element-container {
     position: absolute;
     bottom: 0;
     right: 0;
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    
-    &--physical { background-color: #d8d8d8; }
-    &--fire { background-color: #ff6b4a; }
-    &--ice { background-color: #50c0ff; }
-    &--lightning { background-color: #df78ff; }
-    &--wind { background-color: #3fec9e; }
-    &--quantum { background-color: #7167ff; }
-    &--imaginary { background-color: #ffeb60; }
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+  }
+
+  &__team-member-element-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   &__team-member-name {

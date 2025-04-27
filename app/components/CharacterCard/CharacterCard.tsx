@@ -76,6 +76,7 @@ export const CharacterCard = ({
   // Создаем URL изображения для персонажа и пути
   const optimizedImageUrl = createImageUrl(imageUrl);
   const pathImages = getImageSources(`images/paths/${path.toLowerCase()}`);
+  const elementImages = getImageSources(`images/elements/${element.toLowerCase()}`);
 
   return (
     <Link href={`/character/${id}`} className="character-card">
@@ -90,8 +91,21 @@ export const CharacterCard = ({
             priority={id === 'dhil' || id === 'fu-xuan' || id === 'topaz'}
             unoptimized={true}
           />
-          <div className={`character-card__element character-card__element--${element.toLowerCase()}`}>
-            {translatedElement}
+          <div className={`character-card__element-container character-card__element--${element.toLowerCase()}`}>
+            <picture>
+              <source srcSet={elementImages.avif} type="image/avif" />
+              <source srcSet={elementImages.webp} type="image/webp" />
+              <img 
+                src={elementImages.png} 
+                alt={translatedElement}
+                className="character-card__element-image"
+                width={20}
+                height={20}
+              />
+            </picture>
+            <span className="character-card__element-text">
+              {translatedElement}
+            </span>
           </div>
         </div>
         <div className="character-card__info">

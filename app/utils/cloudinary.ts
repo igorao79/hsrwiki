@@ -80,6 +80,22 @@ export function getImageSources(path: string, isSplash: boolean = false) {
 }
 
 /**
+ * Специальная функция для получения изображений конусов света
+ * 
+ * @param coneId ID конуса света
+ * @returns Объект с URL для разных форматов
+ */
+export function getLightConeImageSources(coneId: string) {
+  const path = `images/lc/${coneId.toLowerCase()}_lc`;
+  
+  return {
+    avif: getCloudinaryUrl(path, 'avif'),
+    webp: getCloudinaryUrl(path, 'webp'),
+    png: getCloudinaryUrl(path, 'png')
+  };
+}
+
+/**
  * Формирует полный URL Cloudinary с трансформациями
  * @param resourcePath Путь к ресурсу в Cloudinary
  * @param options Опции трансформации

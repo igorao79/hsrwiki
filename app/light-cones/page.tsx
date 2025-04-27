@@ -12,29 +12,29 @@ export default function LightConesPage() {
       
       <div className="container">
         <div className={styles.content}>
-          <h1 className={styles.pageTitle}>Конусы Света</h1>
+          <h1 className={styles.pageTitle}>Световые конусы</h1>
           
           <div className={styles.description}>
             <p>
-              Конусы света — это экипировка, которая повышает характеристики персонажей и дает им уникальные способности. 
-              Каждый конус света соответствует определенному пути и имеет разную редкость.
+              Световые конусы — это экипировка, которая повышает характеристики персонажей и дает им уникальные способности. 
+              Каждый световой конус соответствует определенному пути и имеет разную редкость.
             </p>
           </div>
           
           <div className={styles.lists}>
             <LightConeList
               lightCones={fiveStarLightCones}
-              title="5★ Конусы Света"
+              title="5★ Световые конусы"
             />
             
             <LightConeList
               lightCones={fourStarLightCones}
-              title="4★ Конусы Света"
+              title="4★ Световые конусы"
             />
             
             <LightConeList
               lightCones={threeStarLightCones}
-              title="3★ Конусы Света"
+              title="3★ Световые конусы"
             />
           </div>
         </div>

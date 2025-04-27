@@ -4,13 +4,13 @@
   "private": true,
   "homepage": "https://igorao79.github.io/hsrwiki",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build && next export",
-    "predeploy": "npm run build",
-    "deploy": "touch out/.nojekyll && gh-pages -d out --dotfiles"
+    "export": "next build",
+    "predeploy": "npm run build && copy out\\404.html out\\light-cones\\404.html && copy out\\404.html out\\character\\404.html && copy out\\404.html out\\light-cone\\404.html && copy out\\404.html out\\rarity\\404.html",
+    "deploy": "gh-pages -d out --dotfiles"
   },
   "dependencies": {
     "next": "15.3.1",

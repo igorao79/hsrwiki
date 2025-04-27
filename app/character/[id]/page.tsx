@@ -1,35 +1,34 @@
-'use client';
+export const dynamic = 'force-static';
+export const dynamicParams = false;
 
-import { useParams } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { Header } from '../../components/Header/Header';
 import { CharacterDetails } from '../../components/CharacterDetails/CharacterDetails';
 import { characters } from '../../data/fiveStarCharacters';
 import { fourStarCharacters } from '../../data/fourStarCharacters';
-import Link from 'next/link';
 
-export default function CharacterPage() {
-  const params = useParams();
-  const characterId = params.id as string;
+// Функция для генерации статических параметров
+export function generateStaticParams() {
+  // Объединяем всех персонажей из обоих списков
+  const allCharacters = [...characters, ...fourStarCharacters];
+  
+  // Возвращаем массив параметров для каждого персонажа
+  return allCharacters.map((character) => ({
+    id: character.id,
+  }));
+}
+
+// Эта функция вызывается во время рендеринга
+export default function CharacterPage({ params }: { params: { id: string } }) {
+  const id = params.id;
   
   // Ищем персонажа в обоих списках
-  const character = characters.find(char => char.id === characterId) 
-    || fourStarCharacters.find(char => char.id === characterId);
+  const character = characters.find(char => char.id === id) 
+    || fourStarCharacters.find(char => char.id === id);
   
+  // Если персонаж не найден, возвращаем 404
   if (!character) {
-    return (
-      <>
-        <Header />
-        <div className="container">
-          <div className="error-page">
-            <h1>Персонаж не найден</h1>
-            <p>Персонаж, которого вы ищете, не существует.</p>
-            <Link href="/" className="button">
-              На главную
-            </Link>
-          </div>
-        </div>
-      </>
-    );
+    notFound();
   }
 
   return (

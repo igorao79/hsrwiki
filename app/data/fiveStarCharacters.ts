@@ -44,7 +44,7 @@ export const characters: Character[] = [
     description: "Умелый ассасин из Лесного пожара, двигающийся подобно призраку. Изящная и элегантная снаружи, но решительная и эффективная в своих миссиях.",
     bestLightCones: [
       {
-        id: "lc-1",
+        id: "inthenight",
         name: "В ночи",
         imageUrl: "/images/lc/inthenight",
         rarity: 5

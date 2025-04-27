@@ -1,9 +1,10 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { FaStar } from 'react-icons/fa';
-import { getImageSources } from '@/app/utils/cloudinary';
+import { getImageSources, getLightConeImageSources } from '@/app/utils/cloudinary';
 import './CharacterDetails.scss';
 
 export interface LightCone {
@@ -96,6 +97,7 @@ function createImageUrl(imageUrl: string, isSplash: boolean = false): string {
 }
 
 export const CharacterDetails = ({
+  id,
   name,
   element,
   path,
@@ -116,15 +118,31 @@ export const CharacterDetails = ({
   // Получаем изображение пути
   const pathImages = getImageSources(`images/paths/${path.toLowerCase()}`);
   
+  // Получаем изображение элемента
+  const elementImages = getImageSources(`images/elements/${element.toLowerCase()}`);
+  
   return (
     <div className="character-details">
       <div className="character-details__header">
         <div className="character-details__header-content">
           <h1 className="character-details__name">{name}</h1>
           <div className="character-details__meta">
-            <span className={`character-details__element character-details__element--${element.toLowerCase()}`}>
-              {translatedElement}
-            </span>
+            <div className={`character-details__element-container`}>
+              <picture>
+                <source srcSet={elementImages.avif} type="image/avif" />
+                <source srcSet={elementImages.webp} type="image/webp" />
+                <img 
+                  src={elementImages.png} 
+                  alt={translatedElement}
+                  className="character-details__element-image"
+                  width={24}
+                  height={24}
+                />
+              </picture>
+              <span className={`character-details__element character-details__element--${element.toLowerCase()}`}>
+                {translatedElement}
+              </span>
+            </div>
             <div className="character-details__path-container">
               <picture>
                 <source srcSet={pathImages.avif} type="image/avif" />
@@ -174,21 +192,31 @@ export const CharacterDetails = ({
             <h2 className="character-details__section-title">Лучшие Световые конусы</h2>
             <div className="character-details__items">
               {bestLightCones.map((lightCone, index) => {
+                // Используем специальную функцию для изображений конусов света
+                const lightConeImages = getLightConeImageSources(lightCone.id);
+                
                 return (
-                  <div key={lightCone.id} className={`character-details__item ${
-                    index === 0 ? 'character-details__item--gold' : 
-                    index === 1 ? 'character-details__item--silver' : 
-                    index === 2 ? 'character-details__item--bronze' : ''
-                  }`}>
+                  <Link 
+                    href={`/light-cone/${lightCone.id}?ref=character&characterId=${id}`} 
+                    key={lightCone.id} 
+                    className={`character-details__item ${
+                      index === 0 ? 'character-details__item--gold' : 
+                      index === 1 ? 'character-details__item--silver' : 
+                      index === 2 ? 'character-details__item--bronze' : ''
+                    }`}
+                  >
                     <div className="character-details__item-image-container">
-                      <Image
-                        src={createImageUrl(lightCone.imageUrl)}
-                        alt={lightCone.name}
-                        width={80}
-                        height={80}
-                        className="character-details__item-image"
-                        unoptimized={true}
-                      />
+                      <picture>
+                        <source srcSet={lightConeImages.avif} type="image/avif" />
+                        <source srcSet={lightConeImages.webp} type="image/webp" />
+                        <img 
+                          src={lightConeImages.png} 
+                          alt={lightCone.name}
+                          width={80}
+                          height={80}
+                          className="character-details__item-image"
+                        />
+                      </picture>
                     </div>
                     <div className="character-details__item-info">
                       <h3 className="character-details__item-name">{lightCone.name}</h3>
@@ -201,7 +229,7 @@ export const CharacterDetails = ({
                         ))}
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
@@ -243,6 +271,9 @@ export const CharacterDetails = ({
                 <h3 className="character-details__team-name">{team.name}</h3>
                 <div className="character-details__team-members">
                   {team.members.map((member) => {
+                    // Get element image for team member
+                    const memberElementImages = getImageSources(`images/elements/${member.element.toLowerCase()}`);
+                    
                     return (
                       <div key={member.id} className="character-details__team-member">
                         <div className="character-details__team-member-image-container">
@@ -254,7 +285,15 @@ export const CharacterDetails = ({
                             className="character-details__team-member-image"
                             unoptimized={true}
                           />
-                          <div className={`character-details__team-member-element character-details__element--${member.element.toLowerCase()}`}></div>
+                          <div className="character-details__team-member-element-container">
+                            <img 
+                              src={memberElementImages.avif} 
+                              alt={elementTranslations[member.element] || member.element}
+                              className="character-details__team-member-element-image"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
                         </div>
                         <span className="character-details__team-member-name">{member.name}</span>
                       </div>

@@ -34,7 +34,7 @@
     transition: transform 0.5s ease;
   }
 
-  &__element {
+  &__element-container {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
@@ -43,7 +43,23 @@
     font-weight: 600;
     border-radius: 0.25rem;
     background-color: rgba(0, 0, 0, 0.7);
-    
+    display: flex;
+    align-items: center;
+  }
+
+  &__element-image {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    margin-right: 3px;
+  }
+
+  &__element-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  &__element {
     &--physical { color: #d8d8d8; }
     &--fire { color: #ff6b4a; }
     &--ice { color: #50c0ff; }

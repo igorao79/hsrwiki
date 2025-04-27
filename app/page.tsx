@@ -1,55 +1,54 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import { CharacterCard } from './components/CharacterCard/CharacterCard';
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import { Header } from './components/Header/Header';
-import { FaSearch } from 'react-icons/fa';
 import { characters } from './data/fiveStarCharacters';
 import { fourStarCharacters } from './data/fourStarCharacters';
+import { getImageSources } from './utils/cloudinary';
+import './page.scss';
+
+const updateLog = [
+  {
+    date: '27.04.2025',
+    version: '1.0',
+    changes: [
+      'Запуск сайта',
+      'Добавлены картинки всех персонажей',
+    ]
+  }
+];
+
+const devTeam = [
+  { name: 'igorao79', role: 'Разработчик, Редактор' },
+  { name: 'lesya', role: 'Редактор' },
+];
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [randomCharacter, setRandomCharacter] = useState<any>(null);
+  const [lightConesImage, setLightConesImage] = useState({ avif: '', webp: '', png: '' });
+  const [tierListImage, setTierListImage] = useState({ avif: '', webp: '', png: '' });
   
-  // Объединяем все персонажи в один массив для главной страницы
-  const allCharacters = useMemo(() => [...characters, ...fourStarCharacters], []);
-  
-  const filteredCharacters = useMemo(() => {
-    if (!searchQuery.trim()) {
-      return allCharacters;
-    }
+  // Выбираем случайного персонажа при загрузке страницы
+  useEffect(() => {
+    const allCharacters = [...characters, ...fourStarCharacters];
+    const randomIndex = Math.floor(Math.random() * allCharacters.length);
+    setRandomCharacter(allCharacters[randomIndex]);
     
-    const query = searchQuery.toLowerCase().trim();
-    return allCharacters.filter(char => 
-      char.name.toLowerCase().includes(query) || 
-      char.element.toLowerCase().includes(query) || 
-      char.path.toLowerCase().includes(query)
-    );
-  }, [searchQuery, allCharacters]);
+    // Загружаем оптимизированные изображения для других карточек
+    setLightConesImage(getImageSources(`images/background/light-cones`));
+    setTierListImage(getImageSources(`images/background/tier-list`));
+  }, []);
   
-  // Группируем персонажей по патчам и сортируем патчи в порядке убывания
-  const groupedCharacters = useMemo(() => {
-    const groups: Record<string, typeof allCharacters> = {};
+  // Создаем URL для изображения случайного персонажа
+  const getRandomCharacterBg = () => {
+    if (!randomCharacter) return '';
     
-    filteredCharacters.forEach(char => {
-      if (!groups[char.patch]) {
-        groups[char.patch] = [];
-      }
-      groups[char.patch].push(char);
-    });
-    
-    // Преобразуем объект в массив и сортируем по патчам в обратном порядке
-    return Object.entries(groups)
-      .sort(([patchA], [patchB]) => {
-        const [majorA, minorA] = patchA.split('.').map(Number);
-        const [majorB, minorB] = patchB.split('.').map(Number);
-        
-        if (majorA !== majorB) {
-          return majorB - majorA; // Сначала сортируем по мажорной версии в обратном порядке
-        }
-        return minorB - minorA; // Затем по минорной версии в обратном порядке
-      });
-  }, [filteredCharacters]);
-  
+    // Получаем все форматы изображения персонажа
+    const sources = getImageSources(`images/characters/${randomCharacter.id}_splash`);
+    return `url('${sources.webp}')`;
+  };
+
   return (
     <>
       <Header />
@@ -57,49 +56,84 @@ export default function Home() {
         <section className="home-page">
           <h1 className="home-page__title">HSR Вики</h1>
           <p className="home-page__description">
-            Просмотр всех персонажей Honkai: Star Rail и подробной информации
-            о их экипировке, артефактах и командных составах.
+            Просмотр всех персонажей, конусов и тир-листов Honkai: Star Rail
           </p>
           
-          <div className="search-block">
-            <div className="search-container">
-              <input
-                type="text"
-                className="search-input"
-                placeholder="Поиск персонажей..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <FaSearch className="search-icon" />
+          <div className="home-layout">
+            <div className="home-content">
+              <div className="home-grid">
+                <Link 
+                  href="/characters" 
+                  className="home-grid__card"
+                  style={{ backgroundImage: randomCharacter ? getRandomCharacterBg() : 'none' }}
+                >
+                  <div className="home-grid__content">
+                    <h2 className="home-grid__title">Персонажи</h2>
+                    <p className="home-grid__text">
+                      Просмотр всех персонажей, их характеристик и рекомендаций по экипировке
+                    </p>
+                  </div>
+                </Link>
+                
+                <Link 
+                  href="/light-cones" 
+                  className="home-grid__card"
+                  style={{ backgroundImage: `url('${lightConesImage.webp}')` }}
+                >
+                  <div className="home-grid__content">
+                    <h2 className="home-grid__title">Световые конусы</h2>
+                    <p className="home-grid__text">
+                      Информация о световых конусах и их совместимости с персонажами
+                    </p>
+                  </div>
+                </Link>
+                
+                <Link 
+                  href="/tier-list" 
+                  className="home-grid__card"
+                  style={{ backgroundImage: `url('${tierListImage.webp}')` }}
+                >
+                  <div className="home-grid__content">
+                    <h2 className="home-grid__title">Тир-лист</h2>
+                    <p className="home-grid__text">
+                      Актуальный рейтинг персонажей и их эффективности в различных ситуациях
+                    </p>
+                  </div>
+                </Link>
+              </div>
+              
+              <div className="dev-team">
+                <h3 className="dev-team__title">Команда разработчиков</h3>
+                <div className="dev-team__members">
+                  {devTeam.map((member, index) => (
+                    <div key={index} className="dev-team__member">
+                      <h4 className="dev-team__name">{member.name}</h4>
+                      <p className="dev-team__role">{member.role}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            <div className="update-log">
+              <h3 className="update-log__title">Обновления</h3>
+              <div className="update-log__content">
+                {updateLog.map((update, index) => (
+                  <div key={index} className="update-log__entry">
+                    <div className="update-log__header">
+                      <span className="update-log__date">{update.date}</span>
+                      <span className="update-log__version">v{update.version}</span>
+                    </div>
+                    <ul className="update-log__changes">
+                      {update.changes.map((change, changeIndex) => (
+                        <li key={changeIndex} className="update-log__change">{change}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          
-          {filteredCharacters.length > 0 ? (
-            <div className="patch-container">
-              {groupedCharacters.map(([patch, chars]) => (
-                <div key={patch} className="patch-section">
-                  <h2 className="patch-title">Версия {patch}</h2>
-                  <div className="grid">
-                    {chars.map((character) => (
-                      <CharacterCard
-                        key={character.id}
-                        id={character.id}
-                        name={character.name}
-                        element={character.element}
-                        path={character.path}
-                        rarity={character.rarity}
-                        imageUrl={character.imageUrl}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="home-page__empty">
-              <p>Персонажи не найдены. Попробуйте изменить запрос поиска.</p>
-            </div>
-          )}
         </section>
       </div>
     </>
