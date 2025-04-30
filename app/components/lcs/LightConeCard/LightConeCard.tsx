@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { LightCone } from '@/app/data/lightCones';
+import { LightCone } from '@/app/data/lcs/lightCones';
 import { getImageSources, getLightConeImageSources } from '@/app/utils/cloudinary';
 import { RarityStars } from '@/app/components/RarityStars';
 import styles from './LightConeCard.module.scss';

@@ -9,6 +9,8 @@
   --border-color: #2e3b59;
   --star-gold: #FFD700;
   --star-purple: #A020F0;
+  --scrollbar-thumb: #4e6fff;
+  --scrollbar-track: #18223c;
 }
 
 * {
@@ -25,6 +27,33 @@ body {
     'Helvetica Neue', Arial, sans-serif;
   background-color: var(--background-primary);
   color: var(--text-primary);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-light);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
 
 a {

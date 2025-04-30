@@ -5,21 +5,11 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Header } from '@/app/components/Header/Header';
 import { RarityStars } from '@/app/components/RarityStars/RarityStars';
-import { fiveStarLightCones, fourStarLightCones, threeStarLightCones } from '@/app/data/lightCones';
+import { fiveStarLightCones, fourStarLightCones, threeStarLightCones } from '@/app/data/lcs/lightCones';
 import { getImageSources, getLightConeImageSources } from '@/app/utils/cloudinary';
 import styles from './LightConeDetails.module.scss';
 import { BackButton } from './BackButton';
-
-// Переводы путей на русский язык
-const pathTranslations: Record<string, string> = {
-  'Destruction': 'Разрушение',
-  'Hunt': 'Охота',
-  'Erudition': 'Эрудиция',
-  'Harmony': 'Гармония',
-  'Nihility': 'Небытие',
-  'Preservation': 'Сохранение',
-  'Abundance': 'Изобилие',
-};
+import { pathTranslations } from '@/app/utils/translations';
 
 /**
  * Функция для форматирования текста с выделением числовых значений
@@ -214,7 +204,7 @@ export default function LightConePage({ params }: { params: { id: string } }) {
               <ul className={styles.recommendedList}>
                 {lightCone.recommendedCharacters.map((character, index) => (
                   <li key={index}>
-                    <Link href={`/character/${character.id}`}>
+                    <Link href={`/character/${character.id}?ref=lightcone&lightConeId=${lightCone.id}`}>
                       {character.name}
                     </Link>
                   </li>

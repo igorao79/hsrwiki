@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { LightCone } from '@/app/data/lightCones';
+import { LightCone } from '@/app/data/lcs/lightCones';
 import { getImageSources } from '@/app/utils/cloudinary';
 import { RarityStars } from '@/app/components/RarityStars';
 import styles from './LightConeDetails.module.scss';

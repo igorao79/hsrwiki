@@ -7,6 +7,7 @@ export interface Character {
   imageUrl: string;
   description: string;
   patch: string;
+  metaTags?: string[]; // Optional array of meta tags like "meta", "pvp", etc.
   bestLightCones: {
     id: string;
     name: string;
@@ -42,6 +43,7 @@ export const characters: Character[] = [
     patch: "1.0",
     imageUrl: "/images/characters/seele",
     description: "Умелый ассасин из Лесного пожара, двигающийся подобно призраку. Изящная и элегантная снаружи, но решительная и эффективная в своих миссиях.",
+    metaTags: ["Чистый вымысел", "Мета", "Устаревший/слабый персонаж", "Иллюзия конца", "Зал забвения"],
     bestLightCones: [
       {
         id: "inthenight",
@@ -166,13 +168,13 @@ export const characters: Character[] = [
     ]
   },
   {
-    id: "jing-yuan",
+    id: "jingyuan",
     name: "Цзин Юань",
     element: "Lightning",
     path: "Erudition",
     rarity: 5,
     patch: "1.0",
-    imageUrl: "/images/characters/jing-yuan",
+    imageUrl: "/images/characters/jingyuan",
     description: "Глава Сян Чжоу. Спокойный и расчетливый лидер, обладающий могущественной молниеносной силой. В бою его сопровождает верный компаньон - громовой дракон Линчуань.",
     bestLightCones: [
       {
@@ -209,9 +211,9 @@ export const characters: Character[] = [
         name: "Молниеносная атака",
         members: [
           {
-            id: "jing-yuan",
+            id: "jingyuan",
             name: "Цзин Юань",
-            imageUrl: "/images/characters/jing-yuan",
+            imageUrl: "/images/charactersic/jingyuan",
             element: "Lightning"
           },
           {
@@ -878,7 +880,7 @@ export const characters: Character[] = [
   
   // 1.1
   {
-    id: "silver-wolf",
+    id: "silverwolf",
     name: "Серебряный Волк",
     element: "Quantum",
     path: "Nihility",
@@ -1371,7 +1373,7 @@ export const characters: Character[] = [
     ]
   },
   {
-    id: "fu-xuan",
+    id: "fuxuan",
     name: "Фу Сюань",
     element: "Quantum",
     path: "Preservation",
@@ -1379,6 +1381,7 @@ export const characters: Character[] = [
     patch: "1.3",
     imageUrl: "/images/characters/fu-xuan",
     description: "Главная прорицательница Сяньчжоу Луофу. Её способность предвидеть будущее позволяет ей и её команде избегать опасностей и выдерживать сильнейшие атаки противников.",
+    metaTags: ["S-Tier", "Топ сустейнер", "Мета"],
     bestLightCones: [
       {
         id: "lc-fx1",
@@ -1444,13 +1447,13 @@ export const characters: Character[] = [
   
   // 1.4
   {
-    id: "jinglu",
+    id: "jingliu",
     name: "Цзинлю",
     element: "Ice",
     path: "Destruction",
     rarity: 5,
     patch: "1.4",
-    imageUrl: "/images/characters/jinglu",
+    imageUrl: "/images/characters/jingliu",
     description: "Главная прорицательница Сяньчжоу Луофу. Её способность предвидеть будущее позволяет ей и её команде избегать опасностей и выдерживать сильнейшие атаки противников.",
     bestLightCones: [
       {
@@ -2101,6 +2104,7 @@ export const characters: Character[] = [
     patch: "2.1",
     imageUrl: "/images/characters/aventurine",
     description: "Главная прорицательница Сяньчжоу Луофу. Её способность предвидеть будущее позволяет ей и её команде избегать опасностей и выдерживать сильнейшие атаки противников.",
+    metaTags: ["Мета", "SS-Tier"],
     bestLightCones: [
       {
         id: "lc-fx1",
@@ -2309,7 +2313,7 @@ export const characters: Character[] = [
     ]
   },
   {
-    id: "trailblazerh",
+    id: "trailblazersh",
     name: "Первопроходец",
     element: "Imaginary",
     path: "Harmony",
@@ -3176,6 +3180,77 @@ export const characters: Character[] = [
       }
     ]
   },
+  {
+    id: "trailblazersr",
+    name: "Первопроходец",
+    element: "Ice",
+    path: "Remembrance",
+    rarity: 5,
+    patch: "3.0",
+    imageUrl: "/images/characters/stellancaelusr",
+    description: "Глава Сян Чжоу. Спокойный и расчетливый лидер, обладающий могущественной молниеносной силой. В бою его сопровождает верный компаньон - громовой дракон Линчуань.",
+    bestLightCones: [
+      {
+        id: "lc-jy1",
+        name: "Ночь ворона",
+        imageUrl: "/images/light-cones/night-of-the-crow",
+        rarity: 5
+      },
+      {
+        id: "lc-jy2",
+        name: "Планы перед рассветом",
+        imageUrl: "/images/light-cones/before-dawn-plans",
+        rarity: 4
+      }
+    ],
+    bestRelics: [
+      {
+        id: "rel-jy1",
+        name: "Виноградная лоза и громовые стихии",
+        imageUrl: "/images/relics/vine-and-thunder-elements",
+        set: "Виноградная лоза и громовые стихии",
+        piece: "4 предмета"
+      },
+      {
+        id: "rel-jy2",
+        name: "Небесный дифференциатор",
+        imageUrl: "/images/relics/celestial-differentiator",
+        set: "Небесный дифференциатор",
+        piece: "2 предмета"
+      }
+    ],
+    recommendedTeams: [
+      {
+        name: "Молниеносная атака",
+        members: [
+          {
+            id: "jing-yuan",
+            name: "Цзин Юань",
+            imageUrl: "/images/characters/jing-yuan",
+            element: "Lightning"
+          },
+          {
+            id: "tingyun",
+            name: "Тинъюнь",
+            imageUrl: "/images/characters/tingyun",
+            element: "Lightning"
+          },
+          {
+            id: "bronya",
+            name: "Броня",
+            imageUrl: "/images/characters/bronya",
+            element: "Wind"
+          },
+          {
+            id: "luocha",
+            name: "Лоча",
+            imageUrl: "/images/characters/luocha",
+            element: "Imaginary"
+          }
+        ]
+      }
+    ]
+  },
 
   // 3.1
   {
@@ -3320,77 +3395,7 @@ export const characters: Character[] = [
       }
     ]
   },
-  {
-    id: "trailblazerr",
-    name: "Первопроходец",
-    element: "Ice",
-    path: "Remembrance",
-    rarity: 5,
-    patch: "3.0",
-    imageUrl: "/images/characters/stellancaelusr",
-    description: "Глава Сян Чжоу. Спокойный и расчетливый лидер, обладающий могущественной молниеносной силой. В бою его сопровождает верный компаньон - громовой дракон Линчуань.",
-    bestLightCones: [
-      {
-        id: "lc-jy1",
-        name: "Ночь ворона",
-        imageUrl: "/images/light-cones/night-of-the-crow",
-        rarity: 5
-      },
-      {
-        id: "lc-jy2",
-        name: "Планы перед рассветом",
-        imageUrl: "/images/light-cones/before-dawn-plans",
-        rarity: 4
-      }
-    ],
-    bestRelics: [
-      {
-        id: "rel-jy1",
-        name: "Виноградная лоза и громовые стихии",
-        imageUrl: "/images/relics/vine-and-thunder-elements",
-        set: "Виноградная лоза и громовые стихии",
-        piece: "4 предмета"
-      },
-      {
-        id: "rel-jy2",
-        name: "Небесный дифференциатор",
-        imageUrl: "/images/relics/celestial-differentiator",
-        set: "Небесный дифференциатор",
-        piece: "2 предмета"
-      }
-    ],
-    recommendedTeams: [
-      {
-        name: "Молниеносная атака",
-        members: [
-          {
-            id: "jing-yuan",
-            name: "Цзин Юань",
-            imageUrl: "/images/characters/jing-yuan",
-            element: "Lightning"
-          },
-          {
-            id: "tingyun",
-            name: "Тинъюнь",
-            imageUrl: "/images/characters/tingyun",
-            element: "Lightning"
-          },
-          {
-            id: "bronya",
-            name: "Броня",
-            imageUrl: "/images/characters/bronya",
-            element: "Wind"
-          },
-          {
-            id: "luocha",
-            name: "Лоча",
-            imageUrl: "/images/characters/luocha",
-            element: "Imaginary"
-          }
-        ]
-      }
-    ]
-  },
+  
 
   // 3.2
   {

@@ -3,8 +3,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import { RarityStars } from '../RarityStars';
+import { RarityStars } from '../../RarityStars';
 import { getImageSources } from '@/app/utils/cloudinary';
+import { elementTranslations, pathTranslations } from '@/app/utils/translations';
 import './CharacterCard.scss';
 
 interface CharacterCardProps {
@@ -15,29 +16,6 @@ interface CharacterCardProps {
   rarity: number;
   imageUrl: string;
 }
-
-// Переводы элементов на русский
-const elementTranslations: Record<string, string> = {
-  'Physical': 'Физический',
-  'Fire': 'Огонь',
-  'Ice': 'Лёд',
-  'Lightning': 'Электрический',
-  'Wind': 'Ветер',
-  'Quantum': 'Квантовый',
-  'Imaginary': 'Мнимый'
-};
-
-// Переводы путей на русский
-const pathTranslations: Record<string, string> = {
-  'Destruction': 'Разрушение',
-  'Hunt': 'Охота',
-  'Erudition': 'Эрудиция',
-  'Harmony': 'Гармония',
-  'Nihility': 'Небытие',
-  'Preservation': 'Сохранение',
-  'Abundance': 'Изобилие',
-  'Remembrance' : 'Память'
-};
 
 /**
  * Создает URL изображения с кеш-бастером для первой и единственной загрузки

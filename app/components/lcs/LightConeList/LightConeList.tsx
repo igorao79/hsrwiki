@@ -1,24 +1,14 @@
 "use client";
 
 import { useState } from 'react';
-import { LightCone } from '@/app/data/lightCones';
+import { LightCone } from '@/app/data/lcs/lightCones';
 import { LightConeCard } from '../LightConeCard';
 import styles from './LightConeList.module.scss';
 import { getImageSources } from '@/app/utils/cloudinary';
-
-// Перевод путей на русский язык
-const pathTranslations: Record<string, string> = {
-  'Destruction': 'Разрушение',
-  'Hunt': 'Охота',
-  'Erudition': 'Эрудиция',
-  'Harmony': 'Гармония',
-  'Nihility': 'Небытие',
-  'Preservation': 'Сохранение',
-  'Abundance': 'Изобилие',
-};
+import { pathTranslations } from '@/app/utils/translations';
 
 // Все возможные пути
-const allPaths = ['Destruction', 'Hunt', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Abundance'];
+const allPaths = ['Destruction', 'Hunt', 'Erudition', 'Harmony', 'Nihility', 'Preservation', 'Abundance', 'Remembrance'];
 
 interface LightConeListProps {
   lightCones: LightCone[];

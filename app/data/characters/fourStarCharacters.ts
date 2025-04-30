@@ -3,13 +3,13 @@ import { Character } from './fiveStarCharacters';
 export const fourStarCharacters: Character[] = [
   // 1.0
   {
-    id: "danheng",
+    id: "dh",
     name: "Дань Хэн",
     element: "Wind",
     path: "Hunt",
     rarity: 4,
     patch: "1.0",
-    imageUrl: "/images/characters/danheng",
+    imageUrl: "/images/characters/dh",
     description: "Молодая бизнес-компаньонка из Сяньчжоу. Обладает энергией молнии, которую использует для усиления своих товарищей в бою.",
     bestLightCones: [
       {
@@ -74,7 +74,7 @@ export const fourStarCharacters: Character[] = [
     ]
   },
   {
-    id: "marchp",
+    id: "m7p",
     name: "Март 7",
     element: "Ice",
     path: "Preservation",

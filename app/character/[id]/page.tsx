@@ -3,9 +3,9 @@ export const dynamicParams = false;
 
 import { notFound } from 'next/navigation';
 import { Header } from '../../components/Header/Header';
-import { CharacterDetails } from '../../components/CharacterDetails/CharacterDetails';
-import { characters } from '../../data/fiveStarCharacters';
-import { fourStarCharacters } from '../../data/fourStarCharacters';
+import { CharacterDetails } from '../../components/characters/CharacterDetails/CharacterDetails';
+import { characters } from '../../data/characters/fiveStarCharacters';
+import { fourStarCharacters } from '../../data/characters/fourStarCharacters';
 
 // Функция для генерации статических параметров
 export function generateStaticParams() {
@@ -42,6 +42,7 @@ export default function CharacterPage({ params }: { params: { id: string } }) {
         rarity={character.rarity}
         imageUrl={character.imageUrl}
         description={character.description}
+        metaTags={character.metaTags}
         bestLightCones={character.bestLightCones}
         bestRelics={character.bestRelics}
         recommendedTeams={character.recommendedTeams}

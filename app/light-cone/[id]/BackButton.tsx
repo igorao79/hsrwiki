@@ -10,8 +10,11 @@ interface BackButtonProps {
 export function BackButton({ className }: BackButtonProps) {
   const [isFromCharacter, setIsFromCharacter] = useState(false);
   const [characterId, setCharacterId] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
   
   useEffect(() => {
+    setIsMounted(true);
+    
     // Функция для получения параметров URL
     const parseQueryString = (url: string) => {
       const params: Record<string, string> = {};
@@ -39,9 +42,9 @@ export function BackButton({ className }: BackButtonProps) {
     }
   }, []);
   
-  // Если загрузка не завершена, показываем загрузчик
-  if (typeof window === 'undefined') {
-    return null;
+  // Если загрузка не завершена, показываем статичный текст
+  if (!isMounted) {
+    return <div className={className}>← Назад к списку световых конусов</div>;
   }
   
   return isFromCharacter && characterId ? (

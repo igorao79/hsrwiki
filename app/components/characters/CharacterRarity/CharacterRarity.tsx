@@ -1,6 +1,6 @@
 'use client';
 
-import { RarityStars } from '../RarityStars';
+import { RarityStars } from '../../RarityStars';
 import './CharacterRarity.scss';
 
 interface CharacterRarityProps {

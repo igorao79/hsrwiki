@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Header } from './components/Header/Header';
-import { characters } from './data/fiveStarCharacters';
-import { fourStarCharacters } from './data/fourStarCharacters';
+import { characters } from './data/characters/fiveStarCharacters';
+import { fourStarCharacters } from './data/characters/fourStarCharacters';
 import { getImageSources } from './utils/cloudinary';
 import './page.scss';
 
@@ -26,6 +26,7 @@ const devTeam = [
 
 export default function Home() {
   const [randomCharacter, setRandomCharacter] = useState<any>(null);
+  const [characterImages, setCharacterImages] = useState({ avif: '', webp: '', png: '' });
   const [lightConesImage, setLightConesImage] = useState({ avif: '', webp: '', png: '' });
   const [tierListImage, setTierListImage] = useState({ avif: '', webp: '', png: '' });
   
@@ -35,19 +36,15 @@ export default function Home() {
     const randomIndex = Math.floor(Math.random() * allCharacters.length);
     setRandomCharacter(allCharacters[randomIndex]);
     
+    // Загружаем оптимизированные изображения
+    if (allCharacters[randomIndex]) {
+      setCharacterImages(getImageSources(`images/characters/${allCharacters[randomIndex].id}_splash`));
+    }
+    
     // Загружаем оптимизированные изображения для других карточек
     setLightConesImage(getImageSources(`images/background/light-cones`));
     setTierListImage(getImageSources(`images/background/tier-list`));
   }, []);
-  
-  // Создаем URL для изображения случайного персонажа
-  const getRandomCharacterBg = () => {
-    if (!randomCharacter) return '';
-    
-    // Получаем все форматы изображения персонажа
-    const sources = getImageSources(`images/characters/${randomCharacter.id}_splash`);
-    return `url('${sources.webp}')`;
-  };
 
   return (
     <>
@@ -62,11 +59,23 @@ export default function Home() {
           <div className="home-layout">
             <div className="home-content">
               <div className="home-grid">
-                <Link 
-                  href="/characters" 
-                  className="home-grid__card"
-                  style={{ backgroundImage: randomCharacter ? getRandomCharacterBg() : 'none' }}
-                >
+                <Link href="/characters" className="home-grid__card">
+                  <div className="home-grid__image-container">
+                    {randomCharacter && (
+                      <picture>
+                        <source srcSet={characterImages.avif} type="image/avif" />
+                        <source srcSet={characterImages.webp} type="image/webp" />
+                        <img 
+                          src={characterImages.png} 
+                          alt="Character background" 
+                          className="home-grid__image"
+                          width={400}
+                          height={280}
+                          loading="eager"
+                        />
+                      </picture>
+                    )}
+                  </div>
                   <div className="home-grid__content">
                     <h2 className="home-grid__title">Персонажи</h2>
                     <p className="home-grid__text">
@@ -75,11 +84,21 @@ export default function Home() {
                   </div>
                 </Link>
                 
-                <Link 
-                  href="/light-cones" 
-                  className="home-grid__card"
-                  style={{ backgroundImage: `url('${lightConesImage.webp}')` }}
-                >
+                <Link href="/light-cones" className="home-grid__card">
+                  <div className="home-grid__image-container">
+                    <picture>
+                      <source srcSet={lightConesImage.avif} type="image/avif" />
+                      <source srcSet={lightConesImage.webp} type="image/webp" />
+                      <img 
+                        src={lightConesImage.png} 
+                        alt="Light cones background" 
+                        className="home-grid__image"
+                        width={400}
+                        height={280}
+                        loading="eager"
+                      />
+                    </picture>
+                  </div>
                   <div className="home-grid__content">
                     <h2 className="home-grid__title">Световые конусы</h2>
                     <p className="home-grid__text">
@@ -88,11 +107,21 @@ export default function Home() {
                   </div>
                 </Link>
                 
-                <Link 
-                  href="/tier-list" 
-                  className="home-grid__card"
-                  style={{ backgroundImage: `url('${tierListImage.webp}')` }}
-                >
+                <Link href="/tier-list" className="home-grid__card">
+                  <div className="home-grid__image-container">
+                    <picture>
+                      <source srcSet={tierListImage.avif} type="image/avif" />
+                      <source srcSet={tierListImage.webp} type="image/webp" />
+                      <img 
+                        src={tierListImage.png} 
+                        alt="Tier list background" 
+                        className="home-grid__image"
+                        width={400}
+                        height={280}
+                        loading="eager"
+                      />
+                    </picture>
+                  </div>
                   <div className="home-grid__content">
                     <h2 className="home-grid__title">Тир-лист</h2>
                     <p className="home-grid__text">

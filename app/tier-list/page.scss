@@ -10,11 +10,189 @@
   
   &__description {
     text-align: center;
-    max-width: 800px;
-    margin: 0 auto 3rem;
+    font-size: 1.2rem;
     color: var(--text-secondary);
-    font-size: 1.1rem;
-    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 8px rgba(50, 70, 150, 0.3);
+    position: relative;
+    padding-bottom: 0.5rem;
+  
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 30%;
+      right: 30%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(78, 111, 255, 0.3), transparent);
+    }
+  }
+  
+  &__disclaimer-container {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  &__disclaimer-toggle, 
+  &__terminology-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    text-decoration: underline;
+    padding: 0.5rem 1rem;
+    transition: color 0.2s ease;
+  }
+  
+  &__disclaimer-toggle {
+    color: #c75555;
+    
+    &:hover {
+      color: #e63c3c;
+    }
+  }
+  
+  &__terminology-toggle {
+    color: #4169e1;
+    margin-top: 1rem;
+    
+    &:hover {
+      color: #6495ed;
+    }
+  }
+  
+  &__disclaimer, 
+  &__terminology {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.5s ease, opacity 0.3s ease;
+    opacity: 0;
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  &__disclaimer {
+    &.open {
+      max-height: 350px;
+      padding: 1rem;
+      background-color: rgba(220, 53, 69, 0.1);
+      border: 1px solid rgba(220, 53, 69, 0.3);
+      margin-bottom: 1rem;
+      opacity: 1;
+    }
+    
+    &-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    p {
+      color: #c75555;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin: 0;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0.75rem;
+        min-width: 1.25rem;
+        color: #e63c3c;
+        font-size: 1rem;
+        flex-shrink: 0;
+        
+        svg {
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+      }
+    }
+  }
+  
+  &__terminology {
+    &.open {
+      max-height: 700px;
+      padding: 1.25rem;
+      background-color: rgba(65, 105, 225, 0.1);
+      border: 1px solid rgba(65, 105, 225, 0.3);
+      margin-bottom: 1rem;
+      opacity: 1;
+    }
+    
+    &-section {
+      margin-bottom: 1.5rem;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      h3 {
+        color: #4169e1;
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        
+        span {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 0.5rem;
+          color: #6495ed;
+          
+          svg {
+            width: 1.2rem;
+            height: 1.2rem;
+          }
+        }
+      }
+    }
+    
+    &-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding-left: 1rem;
+    }
+    
+    p {
+      color: var(--text-primary);
+      font-size: 1rem;
+      line-height: 1.5;
+      margin: 0;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      
+      strong {
+        color: #4169e1;
+      }
+      
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0.75rem;
+        min-width: 1.25rem;
+        color: #6495ed;
+        font-size: 1rem;
+        flex-shrink: 0;
+        
+        svg {
+          width: 1.1rem;
+          height: 1.1rem;
+        }
+      }
+    }
   }
 }
 
@@ -41,6 +219,42 @@
     &__description {
       font-size: 1rem;
       margin-bottom: 2rem;
+    }
+    
+    &__disclaimer, 
+    &__terminology {
+      &.open {
+        padding: 1rem 0.75rem;
+      }
+      
+      p {
+        font-size: 0.9rem;
+        
+        span {
+          svg {
+            width: 1rem;
+            height: 1rem;
+          }
+        }
+      }
+    }
+    
+    &__disclaimer {
+      &.open {
+        max-height: 450px;
+      }
+    }
+    
+    &__terminology {
+      &.open {
+        max-height: 900px;
+      }
+      
+      &-section {
+        h3 {
+          font-size: 1.1rem;
+        }
+      }
     }
   }
   

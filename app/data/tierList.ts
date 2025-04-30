@@ -1,0 +1,85 @@
+export type TierRank = 'SS' | 'S+' | 'S' | 'A' | 'B' | 'C' | 'D';
+
+export interface TierListCharacter {
+  id: string;
+  name: string;
+  tier: TierRank;
+  role: 'damage' | 'support' | 'sustain';
+}
+
+export const tierListData: TierListCharacter[] = [
+  // Damage Dealers
+  { id: 'castorice', name: 'Кастория', tier: 'SS', role: 'damage' },
+  { id: 'theherta', name: 'Великая Герта', tier: 'SS', role: 'damage' },
+  { id: 'aglaea', name: 'Аглая', tier: 'S+', role: 'damage' },
+  { id: 'mydei', name: 'Мидей', tier: 'S+', role: 'damage' },
+  { id: 'rappa', name: 'Раппа', tier: 'S+', role: 'damage' },
+  { id: 'acheron', name: 'Ахерон', tier: 'S+', role: 'damage' },
+  { id: 'feixiao', name: 'Фэйсяо', tier: 'S', role: 'damage' },
+  { id: 'anaxa', name: 'Анакса', tier: 'S', role: 'damage' },
+  { id: 'yunli', name: 'Юньли', tier: 'S', role: 'damage' },
+  { id: 'firefly', name: 'Светлячок', tier: 'S', role: 'damage' },
+  { id: 'jingyuan', name: 'Цзин Юань', tier: 'S', role: 'damage' },
+  { id: 'boothill', name: 'Бутхилл', tier: 'S', role: 'damage' },
+  { id: 'jade', name: 'Яшма', tier: 'S', role: 'damage' },
+  { id: 'kafka', name: 'Кафка', tier: 'S', role: 'damage' },
+  { id: 'miniherta', name: 'Герта', tier: 'S', role: 'damage' },
+  { id: 'blackswan', name: 'Чёрный Лебедь', tier: 'A', role: 'damage' },
+  { id: 'argenti', name: 'Аргенти', tier: 'A', role: 'damage' },
+  { id: 'dhil', name: 'Дань Хэн Иббитор Лунаэ', tier: 'A', role: 'damage' },
+  { id: 'jingliu', name: 'Цзинлю', tier: 'A', role: 'damage' },
+  { id: 'topaz', name: 'Топаз', tier: 'A', role: 'damage' },
+  { id: 'blade', name: 'Блейд', tier: 'A', role: 'damage' },
+  { id: 'himeko', name: 'Химеко', tier: 'A', role: 'damage' },
+  { id: 'clara', name: 'Клара', tier: 'A', role: 'damage' },
+  { id: 'moze', name: 'Моцзэ', tier: 'A', role: 'damage' },
+  { id: 'serval', name: 'Сервал', tier: 'A', role: 'damage' },
+  { id: 'marchh', name: 'Март 7 (Охота)', tier: 'A', role: 'damage' },
+  { id: 'ratio', name: 'Доктор Рацио', tier: 'B', role: 'damage' },
+  { id: 'seele', name: 'Зеле', tier: 'B', role: 'damage' },
+  { id: 'welt', name: 'Вельт', tier: 'B', role: 'damage' },
+  { id: 'qingque', name: 'Циньцюэ', tier: 'B', role: 'damage' },
+  { id: 'guinaifen', name: 'Гуйнайфэнь', tier: 'B', role: 'damage' },
+  { id: 'luka', name: 'Лука', tier: 'B', role: 'damage' },
+  { id: 'sampo', name: 'Сампо', tier: 'B', role: 'damage' },
+  { id: 'xueyi', name: 'Сюэи', tier: 'B', role: 'damage' },
+  { id: 'yanqing', name: 'Яньцин', tier: 'C', role: 'damage' },
+  { id: 'dh', name: 'Дань Хэн', tier: 'C', role: 'damage' },
+  { id: 'sushang', name: 'Сушан', tier: 'C', role: 'damage' },
+  { id: 'misha', name: 'Миша', tier: 'C', role: 'damage' },
+  { id: 'arlan', name: 'Арлан', tier: 'D', role: 'damage' },
+  { id: 'hook', name: 'Хук', tier: 'D', role: 'damage' },
+  { id: 'trailblazersd', name: 'Первопроходцы (Разрушение)', tier: 'D', role: 'damage' },
+
+  // Supports
+  { id: 'tribbie', name: 'Трибби', tier: 'SS', role: 'support' },
+  { id: 'sunday', name: 'Воскресенье', tier: 'SS', role: 'support' },
+  { id: 'robin', name: 'Зарянка', tier: 'SS', role: 'support' },
+  { id: 'trailblazersr', name: 'Первопроходцы (Память)', tier: 'SS', role: 'support' },
+  { id: 'ruanmei', name: 'Жуань Мей', tier: 'S+', role: 'support' },
+  { id: 'fugue', name: 'Фуга', tier: 'S+', role: 'support' },
+  { id: 'tingyun', name: 'Тинъюнь', tier: 'S', role: 'support' },
+  { id: 'jiaoqiu', name: 'Цзяоцю', tier: 'S', role: 'support' },
+  { id: 'pela', name: 'Пела', tier: 'S', role: 'support' },
+  { id: 'trailblazersh', name: 'Первопроходцы (Гармония)', tier: 'S', role: 'support' },
+  { id: 'sparkle', name: 'Искорка', tier: 'A', role: 'support' },
+  { id: 'silverwolf', name: 'Серебряный Волк', tier: 'A', role: 'support' },
+  { id: 'bronya', name: 'Броня', tier: 'A', role: 'support' },
+  { id: 'asta', name: 'Аста', tier: 'B', role: 'support' },
+  { id: 'yukong', name: 'Юйкун', tier: 'C', role: 'support' },
+  { id: 'hanya', name: 'Ханья', tier: 'C', role: 'support' },
+
+  // Healers
+  { id: 'aventurine', name: 'Авантюрин', tier: 'SS', role: 'sustain' },
+  { id: 'lingsha', name: 'Линша', tier: 'SS', role: 'sustain' },
+  { id: 'huohuo', name: 'Хохо', tier: 'S+', role: 'sustain' },
+  { id: 'gallagher', name: 'Галлахер', tier: 'S+', role: 'sustain' },
+  { id: 'luocha', name: 'Лоча', tier: 'S', role: 'sustain' },
+  { id: 'fuxuan', name: 'Фу Сюань', tier: 'A', role: 'sustain' },
+  { id: 'gepard', name: 'Гепард', tier: 'B', role: 'sustain' },
+  { id: 'bailu', name: 'Байлу', tier: 'B', role: 'sustain' },
+  { id: 'lynx', name: 'Рысь', tier: 'C', role: 'sustain' },
+  { id: 'trailblazersp', name: 'Первопроходцы (Сохранение)', tier: 'C', role: 'sustain' },
+  { id: 'm7p', name: 'Март 7 (Сохранение)', tier: 'D', role: 'sustain'},
+  { id: 'natasha', name: 'Наташа', tier: 'D', role: 'sustain' },
+]; 

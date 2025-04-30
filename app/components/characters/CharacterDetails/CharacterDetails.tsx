@@ -2,9 +2,11 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { FaStar } from 'react-icons/fa';
+import { useState, useEffect, useRef } from 'react';
+import { FaStar, FaTrophy, FaCrown, FaFire, FaExclamationTriangle, FaSkull, FaDungeon } from 'react-icons/fa';
 import { getImageSources, getLightConeImageSources } from '@/app/utils/cloudinary';
+import { elementTranslations, pathTranslations } from '@/app/utils/translations';
+import { BackButton } from '@/app/character/[id]/BackButton';
 import './CharacterDetails.scss';
 
 export interface LightCone {
@@ -37,6 +39,7 @@ export interface CharacterDetailsProps {
   rarity: number;
   imageUrl: string;
   description: string;
+  metaTags?: string[]; // Optional array of meta tags
   bestLightCones: LightCone[];
   bestRelics: Relic[];
   recommendedTeams: {
@@ -45,26 +48,52 @@ export interface CharacterDetailsProps {
   }[];
 }
 
-// Переводы элементов на русский
-const elementTranslations: Record<string, string> = {
-  'Physical': 'Физический',
-  'Fire': 'Огонь',
-  'Ice': 'Лёд',
-  'Lightning': 'Молния',
-  'Wind': 'Ветер',
-  'Quantum': 'Квантовый',
-  'Imaginary': 'Мнимый'
-};
-
-// Переводы путей на русский
-const pathTranslations: Record<string, string> = {
-  'Destruction': 'Разрушение',
-  'Hunt': 'Охота',
-  'Erudition': 'Эрудиция',
-  'Harmony': 'Гармония',
-  'Nihility': 'Небытие',
-  'Preservation': 'Сохранение',
-  'Abundance': 'Изобилие'
+// Helper function to get tag icon and tooltip
+const getTagInfo = (tag: string) => {
+  const lowerTag = tag.toLowerCase();
+  
+  if (lowerTag === 'мета') {
+    return {
+      icon: <FaCrown />,
+      iconType: 'react-icon',
+      tooltip: 'Персонаж хорошо закрывающий все режимы, он определенно нужен вашему аккаунту'
+    };
+  }
+  if (lowerTag === 'зал забвения') {
+    return {
+      iconPath: 'images/other/fh',
+      iconType: 'image',
+      tooltip: 'Этот персонаж хорош в режиме "Зал забвения"'
+    };
+  }
+  if (lowerTag === 'чистый вымысел') {
+    return {
+      iconPath: 'images/other/pf',
+      iconType: 'image',
+      tooltip: 'Этот персонаж хорош в режиме "Чистый вымысел"'
+    };
+  }
+  if (lowerTag === 'иллюзия конца') {
+    return {
+      iconPath: 'images/other/as',
+      iconType: 'image',
+      tooltip: 'Этот персонаж хорош в режиме "Иллюзия конца"'
+    };
+  }
+  if (lowerTag === 'устаревший/слабый персонаж') {
+    return {
+      icon: <FaSkull />,
+      iconType: 'react-icon',
+      tooltip: 'Не рекомендую'
+    };
+  }
+  
+  // Default fallback
+  return {
+    icon: null,
+    iconType: 'react-icon',
+    tooltip: ''
+  };
 };
 
 // Предпочтительные форматы изображений
@@ -104,10 +133,29 @@ export const CharacterDetails = ({
   rarity,
   imageUrl,
   description,
+  metaTags = [], // Default to empty array if not provided
   bestLightCones,
   bestRelics,
   recommendedTeams,
 }: CharacterDetailsProps) => {
+  // State for active tooltip
+  const [activeTooltip, setActiveTooltip] = useState<number | null>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  
+  // Handle clicks outside of tooltip to close them on mobile
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (tooltipRef.current && !tooltipRef.current.contains(event.target as Node)) {
+        setActiveTooltip(null);
+      }
+    };
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   // Перевод элемента и пути
   const translatedElement = elementTranslations[element] || element;
   const translatedPath = pathTranslations[path] || path;
@@ -121,11 +169,71 @@ export const CharacterDetails = ({
   // Получаем изображение элемента
   const elementImages = getImageSources(`images/elements/${element.toLowerCase()}`);
   
+  // Toggle tooltip handler
+  const toggleTooltip = (index: number) => {
+    if (activeTooltip === index) {
+      setActiveTooltip(null);
+    } else {
+      setActiveTooltip(index);
+    }
+  };
+  
   return (
     <div className="character-details">
       <div className="character-details__header">
         <div className="character-details__header-content">
+          <BackButton className="character-details__back-button" />
           <h1 className="character-details__name">{name}</h1>
+          {metaTags && metaTags.length > 0 && (
+            <div className="character-details__meta-tags" ref={tooltipRef}>
+              {metaTags.map((tag, index) => {
+                const tagInfo = getTagInfo(tag);
+                return (
+                  <div 
+                    key={index} 
+                    className="character-details__meta-tag-container"
+                    onClick={() => toggleTooltip(index)}
+                    onMouseEnter={() => window.innerWidth > 768 && setActiveTooltip(index)}
+                    onMouseLeave={() => window.innerWidth > 768 && setActiveTooltip(null)}
+                  >
+                    <span className="character-details__meta-tag">
+                      {tagInfo.iconType === 'react-icon' ? (
+                        tagInfo.icon && <span className="character-details__meta-tag-icon">{tagInfo.icon}</span>
+                      ) : (
+                        tagInfo.iconPath && (
+                          <span className="character-details__meta-tag-icon">
+                            <picture>
+                              <source 
+                                srcSet={getImageSources(tagInfo.iconPath).avif} 
+                                type="image/avif" 
+                              />
+                              <source 
+                                srcSet={getImageSources(tagInfo.iconPath).webp} 
+                                type="image/webp" 
+                              />
+                              <img 
+                                src={getImageSources(tagInfo.iconPath).png} 
+                                alt=""
+                                className="character-details__meta-tag-icon-image"
+                                width={16}
+                                height={16}
+                              />
+                            </picture>
+                          </span>
+                        )
+                      )}
+                      {tag}
+                    </span>
+                    {activeTooltip === index && tagInfo.tooltip && (
+                      <div className="character-details__meta-tag-tooltip">
+                        {tagInfo.tooltip}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
           <div className="character-details__meta">
             <div className={`character-details__element-container`}>
               <picture>
@@ -275,7 +383,11 @@ export const CharacterDetails = ({
                     const memberElementImages = getImageSources(`images/elements/${member.element.toLowerCase()}`);
                     
                     return (
-                      <div key={member.id} className="character-details__team-member">
+                      <Link 
+                        href={`/character/${member.id}`}
+                        key={member.id} 
+                        className="character-details__team-member"
+                      >
                         <div className="character-details__team-member-image-container">
                           <Image
                             src={createImageUrl(member.imageUrl)}
@@ -296,7 +408,7 @@ export const CharacterDetails = ({
                           </div>
                         </div>
                         <span className="character-details__team-member-name">{member.name}</span>
-                      </div>
+                      </Link>
                     );
                   })}
                 </div>

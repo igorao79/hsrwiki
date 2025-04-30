@@ -1,7 +1,7 @@
 'use client';
 
-import { fiveStarLightCones, fourStarLightCones, threeStarLightCones } from '@/app/data/lightCones';
-import LightConeList from '@/app/components/LightConeList';
+import { fiveStarLightCones, fourStarLightCones, threeStarLightCones } from '@/app/data/lcs/lightCones';
+import LightConeList from '@/app/components/lcs/LightConeList';
 import { Header } from '@/app/components/Header/Header';
 import styles from './page.module.scss';
 
